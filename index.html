@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ห้องเรียนครูณัฐฐา</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:   #ffb3c6;
+      --peach:  #ffd6a5;
+      --yellow: #fdffb6;
+      --mint:   #caffbf;
+      --sky:    #a0c4ff;
+      --lavender: #c9b8f5;
+      --white:  #ffffff;
+      --text:   #5a4a6b;
+      --soft:   #9b89b0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background: #fdf6ff;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── Navbar ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px dashed var(--pink);
+    }
+    .nav-brand {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .nav-brand span { color: #d96ba0; }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+    nav a {
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--soft);
+      transition: color 0.2s;
+    }
+    nav a:hover { color: #d96ba0; }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 80px 24px 100px;
+      background: linear-gradient(160deg, #ffe8f0 0%, #e8d5ff 50%, #d0efff 100%);
+      overflow: hidden;
+    }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.45;
+      animation: float 6s ease-in-out infinite;
+    }
+    .b1 { width:160px; height:160px; background:var(--pink);    top:-40px;  left:-40px;  animation-delay:0s; }
+    .b2 { width:120px; height:120px; background:var(--mint);    top:20px;   right:60px;  animation-delay:-2s; }
+    .b3 { width:90px;  height:90px;  background:var(--peach);   bottom:10px;left:15%;    animation-delay:-4s; }
+    .b4 { width:140px; height:140px; background:var(--sky);     bottom:-30px;right:-20px;animation-delay:-1s; }
+
+    .hero-avatar {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--lavender));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.8rem;
+      margin: 0 auto 24px;
+      box-shadow: 0 8px 24px rgba(200,150,200,0.35);
+      animation: bounceIn 0.7s ease both;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--white);
+      color: #d96ba0;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 6px 18px;
+      border-radius: 99px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 10px rgba(200,100,150,0.15);
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.3;
+      background: linear-gradient(135deg, #d96ba0 0%, #9b6ed6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 14px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--soft);
+      max-width: 520px;
+      margin: 0 auto 32px;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .hero-badges {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .badge {
+      background: white;
+      padding: 8px 20px;
+      border-radius: 99px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    /* ── Section base ── */
+    section { padding: 72px 24px; }
+    .section-title {
+      text-align: center;
+      font-size: 1.9rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .section-title span { color: #d96ba0; }
+    .section-sub {
+      text-align: center;
+      color: var(--soft);
+      margin-bottom: 48px;
+      font-size: 1rem;
+    }
+    .container { max-width: 1060px; margin: 0 auto; }
+
+    /* ── About ── */
+    #about { background: #fff; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    @media (max-width: 680px) { .about-grid { grid-template-columns: 1fr; } }
+    .about-card {
+      background: #fdf6ff;
+      border-radius: 20px;
+      padding: 32px;
+      border: 2px solid transparent;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .about-card:hover { border-color: var(--lavender); transform: translateY(-4px); }
+    .about-card .icon { font-size: 2.2rem; margin-bottom: 14px; }
+    .about-card h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 8px; }
+    .about-card p  { font-size: 0.95rem; color: var(--soft); line-height: 1.9; }
+
+    /* ── Announcements ── */
+    #announcements { background: linear-gradient(160deg, #fff5f8 0%, #f5f0ff 100%); }
+    .announce-list { display: flex; flex-direction: column; gap: 16px; }
+    .announce-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      background: white;
+      border-radius: 18px;
+      padding: 24px 28px;
+      box-shadow: 0 4px 18px rgba(180,130,200,0.1);
+      transition: transform 0.2s;
+    }
+    .announce-item:hover { transform: translateX(6px); }
+    .announce-dot {
+      min-width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+    .announce-item h4 { font-size: 1rem; font-weight: 800; margin-bottom: 4px; }
+    .announce-item p  { font-size: 0.9rem; color: var(--soft); line-height: 1.8; }
+    .announce-date {
+      margin-left: auto;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #c9b8f5;
+      white-space: nowrap;
+      padding-left: 12px;
+    }
+
+    /* ── Subjects ── */
+    #subjects { background: #fff; }
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+    }
+    .subject-card {
+      text-align: center;
+      padding: 32px 16px;
+      border-radius: 22px;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: default;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .subject-card:hover { transform: translateY(-6px) rotate(-1deg); box-shadow: 0 10px 28px rgba(0,0,0,0.1); }
+    .subject-card .sub-icon { font-size: 2.6rem; margin-bottom: 12px; }
+    .s1 { background: #fff0f5; color: #c2607e; }
+    .s2 { background: #fff8e6; color: #b07a20; }
+    .s3 { background: #f0fff4; color: #3a8a5a; }
+    .s4 { background: #f0f4ff; color: #4a6abf; }
+    .s5 { background: #fdf0ff; color: #8a50c0; }
+    .s6 { background: #fff5f0; color: #c25a30; }
+
+    /* ── Schedule ── */
+    #schedule { background: linear-gradient(160deg, #f0f8ff 0%, #f8f0ff 100%); }
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 6px 24px rgba(180,140,200,0.12);
+    }
+    .schedule-table th {
+      padding: 16px 20px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #f9a8d4, #c4b5fd);
+      color: white;
+      text-align: left;
+    }
+    .schedule-table td {
+      padding: 14px 20px;
+      font-size: 0.92rem;
+      border-bottom: 1px solid #f5eeff;
+      color: var(--text);
+    }
+    .schedule-table tr:last-child td { border-bottom: none; }
+    .schedule-table tr:hover td { background: #fdf6ff; }
+    .pill {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    /* ── Contact ── */
+    #contact { background: #fff; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+    .contact-card {
+      text-align: center;
+      padding: 36px 24px;
+      border-radius: 22px;
+      transition: transform 0.2s;
+    }
+    .contact-card:hover { transform: translateY(-4px); }
+    .contact-card .icon { font-size: 2.4rem; margin-bottom: 14px; }
+    .contact-card h4 { font-size: 1rem; font-weight: 800; margin-bottom: 6px; }
+    .contact-card p  { font-size: 0.9rem; color: var(--soft); line-height: 1.8; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 36px 24px;
+      background: linear-gradient(135deg, #ffe8f0, #e8d5ff);
+      font-size: 0.9rem;
+      color: var(--soft);
+      font-weight: 600;
+    }
+    footer span { color: #d96ba0; }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounceIn {
+      0%   { opacity: 0; transform: scale(0.6); }
+      70%  { transform: scale(1.08); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(18px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-brand">⭐ ห้องเรียน<span>ครูณัฐฐา</span></div>
+    <ul>
+      <li><a href="#about">เกี่ยวกับครู</a></li>
+      <li><a href="#announcements">ข่าวสาร</a></li>
+      <li><a href="#subjects">วิชาเรียน</a></li>
+      <li><a href="#schedule">ตารางเรียน</a></li>
+      <li><a href="#contact">ติดต่อ</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="bubble b1"></div>
+    <div class="bubble b2"></div>
+    <div class="bubble b3"></div>
+    <div class="bubble b4"></div>
+    <div class="hero-avatar">👩‍🏫</div>
+    <div class="hero-tag">✨ ยินดีต้อนรับสู่ห้องเรียนของเรา!</div>
+    <h1>ณัฐฐา หิตาพิสุทธิ์</h1>
+    <p>ครูประจำชั้น ป.3 · โรงเรียนประถมแสงอรุณ</p>
+    <div class="hero-badges">
+      <span class="badge">📚 ห้อง ป.3/2</span>
+      <span class="badge">🎨 รักงานศิลปะ</span>
+      <span class="badge">🌟 สอนมา 10 ปี</span>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">เกี่ยวกับ<span>ครูณัฐฐา</span> 🌸</h2>
+      <p class="section-sub">มาทำความรู้จักกับคุณครูกันเถอะ!</p>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="icon">🎓</div>
+          <h3>การศึกษา</h3>
+          <p>จบการศึกษาระดับปริญญาตรี สาขาการประถมศึกษา จากจุฬาลงกรณ์มหาวิทยาลัย และไม่เคยหยุดเรียนรู้วิธีสอนใหม่ ๆ ที่สนุกสนาน!</p>
+        </div>
+        <div class="about-card">
+          <div class="icon">💡</div>
+          <h3>สไตล์การสอน</h3>
+          <p>ครูชอบกิจกรรมลงมือทำ เกม และโปรเจกต์กลุ่ม เพราะการเรียนรู้ควรเป็นการผจญภัยทุกวัน!</p>
+        </div>
+        <div class="about-card">
+          <div class="icon">🌈</div>
+          <h3>งานอดิเรก</h3>
+          <p>วาดสีน้ำ ปลูกต้นไม้เล็ก ๆ อ่านหนังสือภาพ และอบคุกกี้มาฝากนักเรียน!</p>
+        </div>
+        <div class="about-card">
+          <div class="icon">🏆</div>
+          <h3>คติประจำห้องเรียน</h3>
+          <p>"ทุกวันคือโอกาสที่จะเรียนรู้สิ่งมหัศจรรย์" — เราเฉลิมฉลองทุกความสำเร็จเล็ก ๆ ด้วยกัน!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Announcements -->
+  <section id="announcements">
+    <div class="container">
+      <h2 class="section-title">📢 <span>ข่าวประกาศ</span>จากห้องเรียน</h2>
+      <p class="section-sub">ติดตามสิ่งที่เกิดขึ้นในห้องเรียนของเราได้ที่นี่</p>
+      <div class="announce-list">
+        <div class="announce-item">
+          <div class="announce-dot" style="background:#fff0f5;">🎉</div>
+          <div>
+            <h4>งานสัปดาห์วิทยาศาสตร์สัปดาห์หน้า!</h4>
+            <p>อย่าลืมนำวัสดุโปรเจกต์มาภายในวันพฤหัสบดี เราจะตกแต่งบอร์ดด้วยกันในเช้าวันศุกร์นะคะ</p>
+          </div>
+          <span class="announce-date">12 พ.ค.</span>
+        </div>
+        <div class="announce-item">
+          <div class="announce-dot" style="background:#f0fff4;">📖</div>
+          <div>
+            <h4>ส่งบันทึกการอ่านประจำเดือน</h4>
+            <p>กรุณาส่งบันทึกการอ่านเดือนพฤษภาคมภายในสิ้นเดือน ตั้งเป้าอย่างน้อย 5 เล่มนะคะ ทุกคนเก่งมากเลย!</p>
+          </div>
+          <span class="announce-date">31 พ.ค.</span>
+        </div>
+        <div class="announce-item">
+          <div class="announce-dot" style="background:#fff8e6;">🌳</div>
+          <div>
+            <h4>校外กิจกรรม — สวนพฤกษศาสตร์</h4>
+            <p>กรุณาส่งใบอนุญาตผู้ปกครองคืนภายในวันที่ 15 พ.ค. ใส่รองเท้าสบาย พกขวดน้ำ และรอยยิ้มมาด้วยนะคะ!</p>
+          </div>
+          <span class="announce-date">20 พ.ค.</span>
+        </div>
+        <div class="announce-item">
+          <div class="announce-dot" style="background:#f0f4ff;">🎨</div>
+          <div>
+            <h4>นิทรรศการศิลปะนักเรียน</h4>
+            <p>ผลงานศิลปะของห้องเราจะจัดแสดงที่ห้องประชุมของโรงเรียน ขอเชิญผู้ปกครองทุกท่านร่วมงานเปิดนิทรรศการด้วยนะคะ!</p>
+          </div>
+          <span class="announce-date">3 มิ.ย.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subjects -->
+  <section id="subjects">
+    <div class="container">
+      <h2 class="section-title">เราเรียน<span>อะไรบ้าง</span> 🚀</h2>
+      <p class="section-sub">วิชาสนุก ๆ ทั้งหมดที่เราเรียนในชั้น ป.3!</p>
+      <div class="subjects-grid">
+        <div class="subject-card s1"><div class="sub-icon">📝</div>ภาษาไทย</div>
+        <div class="subject-card s2"><div class="sub-icon">🔢</div>คณิตศาสตร์</div>
+        <div class="subject-card s3"><div class="sub-icon">🔬</div>วิทยาศาสตร์</div>
+        <div class="subject-card s4"><div class="sub-icon">🌍</div>สังคมศึกษา</div>
+        <div class="subject-card s5"><div class="sub-icon">🗣️</div>ภาษาอังกฤษ</div>
+        <div class="subject-card s6"><div class="sub-icon">🎨</div>ศิลปะ</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schedule -->
+  <section id="schedule">
+    <div class="container">
+      <h2 class="section-title">⏰ <span>ตารางเรียน</span>ประจำสัปดาห์</h2>
+      <p class="section-sub">ตารางเรียนปกติของห้อง ป.3/2</p>
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>เวลา</th>
+            <th>จันทร์</th>
+            <th>อังคาร</th>
+            <th>พุธ</th>
+            <th>พฤหัสบดี</th>
+            <th>ศุกร์</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>08:30</strong></td>
+            <td><span class="pill" style="background:#fff0f5;color:#c2607e;">ภาษาไทย</span></td>
+            <td><span class="pill" style="background:#fff8e6;color:#b07a20;">คณิตศาสตร์</span></td>
+            <td><span class="pill" style="background:#fdf0ff;color:#8a50c0;">ภาษาอังกฤษ</span></td>
+            <td><span class="pill" style="background:#fff0f5;color:#c2607e;">ภาษาไทย</span></td>
+            <td><span class="pill" style="background:#fff5f0;color:#c25a30;">ศิลปะ</span></td>
+          </tr>
+          <tr>
+            <td><strong>10:00</strong></td>
+            <td><span class="pill" style="background:#fff8e6;color:#b07a20;">คณิตศาสตร์</span></td>
+            <td><span class="pill" style="background:#f0fff4;color:#3a8a5a;">วิทยาศาสตร์</span></td>
+            <td><span class="pill" style="background:#fff8e6;color:#b07a20;">คณิตศาสตร์</span></td>
+            <td><span class="pill" style="background:#f0fff4;color:#3a8a5a;">วิทยาศาสตร์</span></td>
+            <td><span class="pill" style="background:#fff8e6;color:#b07a20;">คณิตศาสตร์</span></td>
+          </tr>
+          <tr>
+            <td><strong>11:30</strong></td>
+            <td colspan="5" style="text-align:center;"><span class="pill" style="background:#fdf6ff;color:#9b6ed6;">🍱 พักกลางวัน</span></td>
+          </tr>
+          <tr>
+            <td><strong>13:00</strong></td>
+            <td><span class="pill" style="background:#fdf0ff;color:#8a50c0;">ภาษาอังกฤษ</span></td>
+            <td><span class="pill" style="background:#f0f4ff;color:#4a6abf;">สังคมศึกษา</span></td>
+            <td><span class="pill" style="background:#fff5f0;color:#c25a30;">ศิลปะ</span></td>
+            <td><span class="pill" style="background:#fdf0ff;color:#8a50c0;">ภาษาอังกฤษ</span></td>
+            <td><span class="pill" style="background:#f0f4ff;color:#4a6abf;">สังคมศึกษา</span></td>
+          </tr>
+          <tr>
+            <td><strong>14:30</strong></td>
+            <td><span class="pill" style="background:#f0f4ff;color:#4a6abf;">สังคมศึกษา</span></td>
+            <td><span class="pill" style="background:#fff5f0;color:#c25a30;">ศิลปะ</span></td>
+            <td><span class="pill" style="background:#f0fff4;color:#3a8a5a;">วิทยาศาสตร์</span></td>
+            <td><span class="pill" style="background:#fff5f0;color:#c25a30;">ศิลปะ</span></td>
+            <td><span class="pill" style="background:#fdf0ff;color:#8a50c0;">⭐ อ่านหนังสืออิสระ</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title"><span>ติดต่อ</span>ครูได้เลย 💌</h2>
+      <p class="section-sub">ครูยินดีรับฟังผู้ปกครองทุกท่านเสมอค่ะ!</p>
+      <div class="contact-grid">
+        <div class="contact-card" style="background:#fff0f5;">
+          <div class="icon">📧</div>
+          <h4>อีเมล</h4>
+          <p>nattha@sunshineprimary.ac.th</p>
+        </div>
+        <div class="contact-card" style="background:#f0fff4;">
+          <div class="icon">🕐</div>
+          <h4>เวลาให้คำปรึกษา</h4>
+          <p>จันทร์ – ศุกร์<br>15:00 – 16:00 น.</p>
+        </div>
+        <div class="contact-card" style="background:#f0f4ff;">
+          <div class="icon">🏫</div>
+          <h4>ห้องเรียน</h4>
+          <p>ห้อง ป.3/2 อาคารหลัก<br>ชั้น 2</p>
+        </div>
+        <div class="contact-card" style="background:#fdf0ff;">
+          <div class="icon">📱</div>
+          <h4>ไลน์</h4>
+          <p>@ครูณัฐฐา<br>ตอบกลับภายใน 24 ชั่วโมง</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>สร้างด้วย <span>♥</span> เพื่อห้อง ป.3/2 · โรงเรียนประถมแสงอรุณ · 2569</p>
+    <p style="margin-top:6px;">ครู<span>ณัฐฐา หิตาพิสุทธิ์</span> · ครูประจำชั้น ป.3</p>
+  </footer>
+
+</body>
+</html>
